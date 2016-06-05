@@ -1,0 +1,66 @@
+%----------------------------------------------------------------
+% Experience list entry
+% #1: Start date
+% #1: End dates
+% #2: Position
+% #3: Location
+% #4: Company
+% #5: Description
+\setlength{\tabcolsep}{0pt}
+\newenvironment{experiencelist}{%
+    \setlength{\tabcolsep}{3pt}
+    \begin{tabular*}{\textwidth}{rl}%
+}{%
+    \end{tabular*}%
+}%
+\renewcommand{\bfseries}{\headingfont\color{headercolor}}%
+\newcommand{\entry}[6]{%
+    #1 -- #2&\parbox[t]{11.5cm}{%
+        \textbf{#3}%
+        \hfill%
+        {\footnotesize\addfontfeature{Color=lightgray} #4}\\%
+        {\color{gray}\bodyfontit #5}\\%
+        #6\vspace{\parsep}%
+    }%
+    \\%
+}
+
+
+
+%----------------------------------------------------------------
+% Body
+\newcounter{colorCounter}
+\def\@sectioncolor#1#2#3{%
+    {%
+        \color{%
+        \ifcase\value{colorCounter}%
+            red\or%
+             orange\or%
+             blue\or%
+             green\or%
+             purple\or%
+             aquamarine\else%
+             headercolor\fi%
+         } #1#2#3%
+     }%
+     \stepcounter{colorCounter}%
+}
+
+
+% #1: Section name
+\renewcommand{\section}[1]{
+    {\par\vspace{\parskip}
+    {%
+        \LARGE\headingfont\color{headercolor}%
+        \@sectioncolor #1%
+    }
+    \par\vspace{\parskip}}
+}
+
+\renewcommand{\subsection}[1]{
+    \par\vspace{.5\parskip}%
+    {\large\headingfont\color{headercolor} #1}%
+    \par\vspace{.25\parskip}%
+}
+
+\pagestyle{empty}
